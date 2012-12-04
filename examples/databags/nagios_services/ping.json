@@ -1,0 +1,4 @@
+{ "id": "ping"
+, "hostgroup_name": "all"
+, "command_line": "$USER1$/check_ping -H $HOSTADDRESS$ -w 200.0,20% -c 500.0,60% -p 5"
+}

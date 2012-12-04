@@ -1,0 +1,4 @@
+{ "id": "unicorn_proc"
+, "hostgroup_name": "appserver"
+, "command_line": "$USER1$/check_nrpe -H $HOSTADDRESS$ -c check_unicorn -t 20"
+}

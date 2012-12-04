@@ -1,0 +1,4 @@
+{ "id": "mysql_server"
+, "hostgroup_name": "database_master"
+, "command_line": "$USER1$/check_nrpe -H $HOSTADDRESS$ -c check_mysql_server -t 20"
+}

@@ -1,0 +1,100 @@
+TO EXTRACT
+
+define command {
+  command_name    check_zombie_procs
+  command_line    $USER1$/check_nrpe -H $HOSTADDRESS$ -c check_zombie_procs -t 20
+}
+
+define command {
+  command_name    check_swap
+  command_line    $USER1$/check_nrpe -H $HOSTADDRESS$ -c check_swap -t 20
+}
+
+define command {
+  command_name    check-host-alive
+  command_line    $USER1$/check_ping -H $HOSTADDRESS$ -w 2000,80% -c 3000,100% -p 1
+}
+
+define command {
+  command_name    check_file_age
+  command_line    $USER1$/check_by_ssh -H $HOSTADDRESS$ -C "/usr/local/bin/check_file -i -p $ARG1$ -w $ARG2$ -c $ARG3$" -l root
+}
+
+define command {
+  command_name    check_file_count
+  command_line    $USER1$/check_by_ssh -H $HOSTADDRESS$ -C "/usr/lib/nagios/checks/file_queues.rb -t count -p $ARG1$ -w $ARG2$ -c $ARG3$" -l app
+}
+
+define command {
+  command_name    check_log
+  command_line    $USER1$/check_by_ssh -H $HOSTADDRESS$ -C "/usr/lib64/nagios/plugins/check_log -F $ARG1$ -O /tmp/nagios.logcheck.processed -q $ARG2$" -l root
+}
+
+define command {
+  command_name    check_solr
+  command_line    $USER1$/check_solr.rb -c 10 -h $HOSTADDRESS$ -r 10 -p $ARG1$
+
+}
+
+define command {
+  command_name    query_solr
+  command_line    $USER1$/check_solr.rb -c 10 -h $HOSTADDRESS$ -r 10 -p $ARG1$ -q $ARG2$
+
+}
+
+define command {
+	command_name	check_mysql
+	command_line	$USER1$/check_mysql -H $ARG1$ -u nagios -p $ARG2$
+}
+
+
+define command {
+	command_name    check_mysqlhealth
+	command_line    $USER1$/check_mysqlhealth.pl -H $HOSTADDRESS$ -u nagios -p $ARG1$ --port 3306 --wa 500 --cc 550
+}
+
+define command {
+	command_name    check_nrpe_alive
+	command_line    $USER1$/check_nrpe -H $HOSTADDRESS$ -t 20
+	}
+
+
+define command {
+	command_name	check_mysqlrep
+	command_line	$USER1$/check-mysql-slave.pl --host $HOSTADDRESS$ --port $ARG1$ --user replcheck --password $ARG2$ --warn $ARG3$ --crit $ARG4$
+}
+
+define command {
+	command_name	check_query_count
+	command_line	$USER1$/db_queues.rb -H $HOSTADDRESS$ -u $ARG1$ -p $ARG2$ -d $ARG3$ -q $ARG4$ -w $ARG5$ -c $ARG6$
+}
+
+define command {
+  command_name    check_ftp
+  command_line    $USER1$/check_ftp -H $HOSTADDRESS$
+}
+
+define command {
+  command_name    check_hpjd
+  command_line    $USER1$/check_hpjd -H $HOSTADDRESS$ -C public
+}
+
+define command {
+  command_name    check_nntp
+  command_line    $USER1$/check_nntp -H $HOSTADDRESS$
+}
+
+define command {
+  command_name    check_pop
+  command_line    $USER1$/check_pop -H $HOSTADDRESS$
+}
+
+define command {
+  command_name    check_smtp
+  command_line    $USER1$/check_smtp -H $HOSTADDRESS$
+}
+
+define command {
+  command_name    check_telnet
+  command_line    $USER1$/check_tcp -H $HOSTADDRESS$ -p 23
+}
