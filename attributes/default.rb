@@ -24,6 +24,8 @@ default['nagios']['multi_environment_monitoring'] = false
 default['nagios']['user']  = 'nagios'
 default['nagios']['group'] = 'nagios'
 
+default['nagios']['hosts_template'] = 'server'
+
 case node['platform_family']
 when 'debian'
   default['nagios']['plugin_dir'] = '/usr/lib/nagios/plugins'
